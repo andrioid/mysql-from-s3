@@ -19,3 +19,4 @@ I use s3gof3r to stream the compressed dump file from S3.
 - S3_OBJ: Object name (with prefix)
 - AWS_ACCESS_KEY_ID: IAM key
 - AWS_SECRET_ACCESS_KEY=none: IAM secret (has to have S3 read access)
+- MYSQL_ROOT_PASSWORD
