@@ -1,6 +1,6 @@
 # mysql-from-s3
 
-It's essentially "[mysql:5.6](https://registry.hub.docker.com/_/mysql/)" from the official builds on Docker Hub, with a twist.
+It's essentially "[mysql:5.6](https://registry.hub.docker.com/_/mysql/)" from the official builds on Docker Hub, with a twist. You can find an automated build on [Docker Hub](https://registry.hub.docker.com/u/andrioid/mysql-from-s3/).
 
 ## Introduction
 
