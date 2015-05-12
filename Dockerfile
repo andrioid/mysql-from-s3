@@ -13,8 +13,6 @@ RUN apt-get update && \
 	cp gof3r /usr/local/bin
 
 COPY docker-entrypoint.sh /entrypoint.sh
-COPY s3-restore.sh /s3-restore.sh
-COPY supervisord.conf /etc/
 
 RUN chmod 755 /*.sh
 
