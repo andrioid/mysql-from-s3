@@ -20,3 +20,7 @@ I use s3gof3r to stream the compressed dump file from S3.
 - AWS_ACCESS_KEY_ID: IAM key
 - AWS_SECRET_ACCESS_KEY=none: IAM secret (has to have S3 read access)
 - MYSQL_ROOT_PASSWORD
+
+You also have to add a volume for /var/lib/mysql if you don't want the container to seed every time you run it.
+
+If you have plans to use this as a personal DB. I strongly recommend that you automatically backup your database to S3.
