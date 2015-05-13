@@ -78,6 +78,7 @@ while [ $RUNNING -eq 0 ]; do
 
 		if [ $? -eq 0 ]; then
 			echo "Trying to seed the database"
+			set -e
 			gof3r get -b $S3_BUCKET -k $S3_OBJ | pv --rate --bytes --name "From S3" | gunzip | mysql -u root --password=$MYSQL_ROOT_PASSWORD
 			if [ $? -eq 0 ]; then
 				SEEDED=1
