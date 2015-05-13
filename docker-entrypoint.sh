@@ -73,7 +73,7 @@ while [ $RUNNING -eq 0 ]; do
 	$(kill -0 $MYSQL_PID)
 	RUNNING=$?
 
-	if [ $SEEDED -eq 0 ] && [ $S3_BUCKET ] && [ $S3_OBJ ]; then
+	if [ "$SEEDED" -eq 0 ] && [ "$S3_BUCKET" ] && [ "$S3_OBJ" ]; then
 		echo 'SELECT 1' | mysql -u root --password="$MYSQL_ROOT_PASSWORD"
 
 		if [ $? -eq 0 ]; then
