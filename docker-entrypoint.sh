@@ -58,7 +58,7 @@ if [ "$1" = 'mysqld' ]; then
 		
 		MYSQL_PARAMS="--init-file=$tempSqlFile"
 
-		set -- "$@" 
+		#set -- "$@" 
 	fi
 	
 	chown -R mysql:mysql "$DATADIR"
@@ -75,15 +75,23 @@ RUNNING=0
 set +e
 while [ $RUNNING -eq 0 ]; do
 	$(kill -0 $MYSQL_PID)
-	RUNNING=$?
+	if [ ! $? -eq 0 ]; then
+		echo "Process has died mysteriously. Someone call Scooby Doo."
+		RUNNING=255
+	fi
+
+	export MYSQL_PWD=$MYSQL_ROOT_PASSWORD
 
 	if [ "$SEEDED" -eq 0 ] && [ -n "$S3_BUCKET" ] && [ -n "$S3_OBJ" ]; then
-		echo 'SELECT 1' | mysql -u root --password="$MYSQL_ROOT_PASSWORD"
+		echo "Connecting to Database..."
+		echo 'SELECT 1' | mysql -u root  > /dev/null 2>&1
+		LISTENING=$?
+		
 
-		if [ $? -eq 0 ]; then
-			echo "Trying to seed the database"
+		if [ $LISTENING -eq 0 ]; then
+			echo "Seeding Database from S3"
 			set -e
-			gof3r get -b $S3_BUCKET -k $S3_OBJ | pv --rate --bytes --name "From S3" | gunzip | mysql -u root --password=$MYSQL_ROOT_PASSWORD
+			gof3r get -b $S3_BUCKET -k $S3_OBJ | pv --rate --bytes --name "From S3" | gunzip | mysql -u root
 			if [ $? -eq 0 ]; then
 				SEEDED=1
 				echo "Database successfully seeded from S3."
