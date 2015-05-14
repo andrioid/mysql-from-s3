@@ -56,13 +56,17 @@ if [ "$1" = 'mysqld' ]; then
 		
 		echo 'FLUSH PRIVILEGES ;' >> "$tempSqlFile"
 		
-		set -- "$@" --init-file="$tempSqlFile"
+		MYSQL_PARAMS="--init-file=$tempSqlFile"
+
+		set -- "$@" 
 	fi
 	
 	chown -R mysql:mysql "$DATADIR"
 fi
 
-exec "$@" &
+mysqld_safe "$MYSQL_PARAMS" &
+
+#exec "$@" &
 
 MYSQL_PID=$!
 RUNNING=0
