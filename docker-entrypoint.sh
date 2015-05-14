@@ -57,7 +57,7 @@ fi
 
 chown -R mysql:mysql "$DATADIR"
 
-nohup /usr/bin/mysqld_safe "$MYSQL_PARAMS" &
+/usr/sbin/mysqld "$MYSQL_PARAMS" &
 
 #exec "$@" &
 

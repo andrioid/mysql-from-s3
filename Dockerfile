@@ -10,6 +10,7 @@ RUN apt-get update && \
 		-O gof3r.tar.gz --no-check-certificate && \
 	tar xvfz gof3r.tar.gz && \
 	cd gof3r_${GOF3R_VERSION}_linux_amd64 && \
+	echo "log-error /dev/stderr > /etc/mysql/conf.d/logerror" && \
 	cp gof3r /usr/local/bin
 
 COPY docker-entrypoint.sh /entrypoint.sh
