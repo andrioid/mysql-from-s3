@@ -68,7 +68,7 @@ if [ $AVAILABLE_RAM -lt 1000000 ]; then
 	cp /my-mini.cnf /etc/mysql/conf.d
 fi
 
-/usr/sbin/mysqld "$MYSQL_PARAMS" &
+/usr/sbin/mysqld $MYSQL_PARAMS &
 
 #exec "$@" &
 
@@ -93,7 +93,7 @@ while [ $RUNNING -eq 0 ]; do
 		
 
 		if [ $LISTENING -eq 0 ]; then
-			echo "Seeding Database from S3"
+			echo "Seeding $S3_OBJ from $S3_BUCKET"
 			set -e
 			gof3r get -b $S3_BUCKET -k $S3_OBJ | pv --rate --bytes --name "From S3" | gunzip | mysql -u root
 			if [ $? -eq 0 ]; then
