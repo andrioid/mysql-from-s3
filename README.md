@@ -2,13 +2,21 @@
 
 It's essentially "[mysql:5.6](https://registry.hub.docker.com/_/mysql/)" from the official builds on Docker Hub, with a twist. You can find an automated build on [Docker Hub](https://registry.hub.docker.com/u/andrioid/mysql-from-s3/).
 
+Note: This is pretty early and I'm still fighting with a few bugs. It's a work in progress.
+
 ## Introduction
 
 ![If you persist your database to host and the host dies. You're gonna have a bad time.](http://i.imgur.com/8ZY9RkG.jpg)
 
-MySQL server that will seed the database from a gzipped dump file on S3 when run for the first time.
+MySQL server that will seed the database from a gzipped dump file on S3 when run for the first time. I use s3gof3r to stream the compressed dump file from S3.
 
-I use s3gof3r to stream the compressed dump file from S3.
+
+### MySQL 5.6 and small VPS machines
+According to a [bug](https://github.com/docker-library/mysql/issues/3) MySQL 5.6 is not intended to run on tiny boxes. I'm not content with that, so if the server detects that your memory is below 1GB it will load a secondary configuration that will do the following:
+
+- Lower the memory footprint as much as possible
+- Disable InnoDB
+- Disable Performance Metrics
 
 ## Use Cases
 

@@ -57,6 +57,17 @@ fi
 
 chown -R mysql:mysql "$DATADIR"
 
+## Check during runtime if memory is low, then replace my.cnf with a minimal config
+## See /proc/meminfo
+
+# Before: 726835200
+AVAILABLE_RAM=$(cat /proc/meminfo | grep MemAvailable | awk '{print $2}')
+#echo "Available RAM: $AVAILABLE_RAM"
+if [ $AVAILABLE_RAM -lt 1000000 ]; then
+	echo "Low on RAM. Overriding my.cnf with a minimal config"
+	cp /my-mini.cnf /etc/mysql/conf.d
+fi
+
 /usr/sbin/mysqld "$MYSQL_PARAMS" &
 
 #exec "$@" &

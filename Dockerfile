@@ -14,7 +14,8 @@ RUN apt-get update && \
 	cp gof3r /usr/local/bin
 
 COPY docker-entrypoint.sh /entrypoint.sh
+COPY my-mini.cnf /my-mini.cnf
 
 RUN chmod 755 /*.sh
 
-# TODO: Restore from S3 after we launch the database in the background
+# TODO: Do something to reduce the MySQL footprint, or get bigger machines
