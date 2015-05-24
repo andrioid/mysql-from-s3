@@ -18,6 +18,8 @@ According to a [bug](https://github.com/docker-library/mysql/issues/3) MySQL 5.6
 - Disable InnoDB
 - Disable Performance Metrics
 
+This enables me to run a database on [DigitalOcean](https://www.digitalocean.com/?refcode=eb735821ebb8)'s (referral link) 512MB droplets without adding swap.
+
 ## Use Cases
 
 

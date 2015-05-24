@@ -33,11 +33,10 @@ default-tmp-storage-engine=myisam
 innodb=off
 
 # Neede to Disable InnoDB
-loose-innodb-trx=0 
-loose-innodb-locks=0 
-loose-innodb-lock-waits=0 
-loose-innodb-cmp=0 
-loose-innodb-cmp-per-index=0
+loose-innodb-trx=0
+loose-innodb-locks-unsafe-for-binlog=0
+loose-innodb-lock-waits=0
+loose-innodb-cmp-per-index-enabled=0
 loose-innodb-cmp-per-index-reset=0
 loose-innodb-cmp-reset=0 
 loose-innodb-cmpmem=0 
@@ -46,8 +45,7 @@ loose-innodb-buffer-page=0
 loose-innodb-buffer-page-lru=0 
 loose-innodb-buffer-pool-stats=0 
 loose-innodb-metrics=0 
-loose-innodb-ft-default-stopword=0 
-loose-innodb-ft-inserted=0 
+loose-innodb-ft-default-stopword=0
 loose-innodb-ft-deleted=0 
 loose-innodb-ft-being-deleted=0 
 loose-innodb-ft-config=0 
@@ -60,3 +58,4 @@ loose-innodb-sys-columns=0
 loose-innodb-sys-fields=0 
 loose-innodb-sys-foreign=0 
 loose-innodb-sys-foreign-cols=0 
+skip-name-resolve

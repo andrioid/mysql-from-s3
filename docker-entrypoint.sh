@@ -95,6 +95,7 @@ while [ $RUNNING -eq 0 ]; do
 		if [ $LISTENING -eq 0 ]; then
 			echo "Seeding $S3_OBJ from $S3_BUCKET"
 			set -e
+			set -o pipefail
 			gof3r get -b $S3_BUCKET -k $S3_OBJ | pv --rate --bytes --name "From S3" | gunzip | mysql -u root
 			if [ $? -eq 0 ]; then
 				SEEDED=1
@@ -110,3 +111,4 @@ while [ $RUNNING -eq 0 ]; do
 	sleep 5
 done
 
+# TODO: Capture stop signal and do a backup.
